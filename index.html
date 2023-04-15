@@ -1,25 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>News API</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="index.css">
+    <title>News</title>
 </head>
 <body>
     <form class="search" action="">
         <label for="">News</label>
-        <input type="input"><br>
+        <input class="input" type="text"><br>
         <input type="Submit">
     </form>
 
     <div class="container">
-        <ul class="class-list"></ul>
+        <ul class="newsList"></ul>
 
     </div>
     
-    <script src='index.js'></script>
+    <script>
+
+        const seachFrom = document.querySelector('.search');
+        const input = document.querySelector('.input');
+        const newsList = document.querySelector('.class-list');
+
+        seachFrom.addEventListener('submit', retrieve)
+
+        function retrieve(e){
+
+            if (input.value == ''){
+                alert('Input field is empty!')
+                return
+            }
+            newsList.innerHTML = ''
+
+            e.preventDefault()
+
+            const apiKey = 'f202563e74b74bd69505afaaaca576c5'
+
+            let topic = input.value;
+
+            let url = `https://newsapi.org/v2/everything?q=${topic}&apiKey=${apiKey}`
+
+            fetch(url).then((res) => {
+                return res.json()
+            }).then((data) => {
+                console.log(data)
+
+                data.articles.forEach(article => {
+                    let li = document.createElement('li');
+                    let a = document.createElement('a');
+                    a.setAttribute('href', article.url);
+                    a.setAttribute('target', '_blank');
+                    a.textContent = article.title;
+                    li.appendChild(a);
+                    newsList.appendChild(li);
+                })
+            }).catch((error) => {
+                console.log(error)
+            })
+
+        }
+    </script>
 
 </body>
 </html>

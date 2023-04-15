@@ -1,33 +1,41 @@
-const seachFrom = document.querySelector('.search');
-const input = document.querySelector('.input');
-const newsList = document.querySelector('.class-list');
+// const seachFrom = document.querySelector('.search');
+// const input = document.querySelector('.input');
+// const newsList = document.querySelector('.class-list');
 
-seachFrom.addEventListener('submit', retrieve)
+// seachFrom.addEventListener('submit', retrieve)
 
-function retrieve(e){
+// function retrieve(e){
 
-    e.preventDefault()
+//     if (input.value == ''){
+//         alert('Input field is empty!')
+//         return
+//     }
+//     newsList.innerHTML = ''
 
-    const apiKey = 'f202563e74b74bd69505afaaaca576c5'
+//     e.preventDefault()
 
-    let topic = input.value;
+//     const apiKey = 'f202563e74b74bd69505afaaaca576c5'
 
-    let url = `https://newsapi.org/v2/everything?q=${topic}&apiKey=${apiKey}`
+//     let topic = input.value;
 
-    fetch(url).then((res) => {
-        return res.json()
-    }).then((data) => {
-        console.log(data)
+//     let url = `https://newsapi.org/v2/everything?q=${topic}&apiKey=${apiKey}`
 
-        data.articles.forEach(article => {
-            let li = document.createElement('li');
-            let a = document.createElement('a');
-            a.setAttribute('href', article.url);
-            a.setAttribute('target', 'blank');
-            a.textContent = article.title
-            li.appendChild(a);
-            newsList.appendChild(li);
-        })
-    })
+//     fetch(url).then((res) => {
+//         return res.json()
+//     }).then((data) => {
+//         console.log(data)
 
-}
+//         data.articles.forEach(article => {
+//             let li = document.createElement('li');
+//             let a = document.createElement('a');
+//             a.setAttribute('href', article.url);
+//             a.setAttribute('target', '_blank');
+//             a.textContent = article.title;
+//             li.appendChild(a);
+//             newsList.appendChild(li);
+//         })
+//     }).catch((error) => {
+//         console.log(error)
+//     })
+
+// }
